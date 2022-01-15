@@ -2,16 +2,16 @@ import React from 'react';
 import { Container, Form, Col, Row, Button } from 'react-bootstrap';
 import firebaseApp from '../credenciales';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore'
+import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage'
 
 const firestore = getFirestore(firebaseApp)
+const storage = getStorage(firebaseApp)
 
 const AddNews = ({ correoUsuario, setArrayNews, arrayNews }) => {
+    
+    // let urlDescarga;
 
-
-    async function fileHandler(e){
-        //detectar archivo
-        //cargarlos a firebase 
-    }
+   
 
     async function adddNews(e) {
 
@@ -49,6 +49,18 @@ const AddNews = ({ correoUsuario, setArrayNews, arrayNews }) => {
 
 
     }
+
+    // async function fileHandler(e){
+    //     //detectar archivo
+    //     const archivoLocal = e.target.files[0];
+    //     //cargarlos a firebase 
+    //     const archivoRef = ref(storage, `documentos/${archivoLocal.name}`)
+    //     await uploadBytes(archivoRef, archivoLocal);
+    //     //obtener url de descarga
+
+    //      urlDescarga = getDownloadURL(archivoRef)
+
+    // }
     return (
         <>
             <Container>
@@ -56,7 +68,7 @@ const AddNews = ({ correoUsuario, setArrayNews, arrayNews }) => {
                     <Row>
                         <Col><Form.Control type="text" placeholder='News Titles' id="formTitle" /></Col>
                         <Col><Form.Control type="text" placeholder='News Descriptions' id="formDescripcion" /></Col>
-                        <Col><Form.Control type="text" placeholder='News images' id="formUrl" /></Col>
+                        <Col><Form.Control type="text" placeholder='News images'  id="formUrl"/></Col>
                         <Col><Form.Control type="date" placeholder='Date' id="formDate" /></Col>
                         <Col><Button type="submit">Add News</Button></Col>
                         <Col></Col>
